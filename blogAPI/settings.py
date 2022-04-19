@@ -34,7 +34,7 @@ THIRD_PARTY_APPS = [
 ]
 
 CUSTOM_CREATED_APPS = [
-    'apps.posts'
+    'posts'
 ]
 
 INSTALLED_APPS = [
