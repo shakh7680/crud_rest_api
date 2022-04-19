@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+# Translations
+*.mo
+*.pot
+assets/
+.venv
+.env
