@@ -15,10 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from blogAPI.drf_yasg import yasg_schema_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('posts.urls')),
-    path('api-auth/', include('rest_framework.urls'))
-
+    path('chat/', include('chat.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('swagger/', yasg_schema_view.with_ui(
+        'swagger', cache_timeout=0), name="schema-swagger-ui"),
+    path('redoc/', yasg_schema_view.with_ui(
+        'redoc', cache_timeout=0), name="schema-redoc",)
 ]

@@ -9,6 +9,12 @@ class PostListView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+    def get_serializer_context(self):
+        lan_code = self.request.query_params.get("lan_code")
+        return {"request": self.request, "lan_code": lan_code}
+
+
+
 class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthorOrReadOnly]
     queryset = Post.objects.all()

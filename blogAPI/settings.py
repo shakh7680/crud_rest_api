@@ -26,18 +26,23 @@ SECRET_KEY = 'django-insecure-l4tt+^q6=9=%f^tseyph_m4*ivx1+tzdp5v%(rhevwa)0-eltd
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+SITE_ID = 1
 
 # Application definition
 THIRD_PARTY_APPS = [
+    'parler',
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_yasg',
+    'rest_framework_swagger',
+    'channels',
     # 'allauth',
     # 'allauth.account',
 ]
 
 CUSTOM_CREATED_APPS = [
-    'posts'
+    'posts',
+    'chat',
 ]
 
 INSTALLED_APPS = [
@@ -48,6 +53,14 @@ INSTALLED_APPS = [
                     'django.contrib.messages',
                     'django.contrib.staticfiles',
                 ] + THIRD_PARTY_APPS + CUSTOM_CREATED_APPS
+
+ASGI_APPLICATION = 'blogAPI.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default':{
+        'BACKEND':'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -63,6 +76,29 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+LANGUAGE_CODE = 'uz'
+
+LANGUAGES = (
+    ('en', 'English'),
+    ('uz', 'Uzbek'),
+    ('ru', 'Russian'),
+)
+
+PARLER_DEFAULT_LANGUAGE_CODE = LANGUAGE_CODE
+
+PARLER_LANGUAGES = {
+    1: (
+        {'code': 'uz'},
+        {'code': 'en'},
+        {'code': 'ru'},
+    ),
+    'default': {
+        'fallback': LANGUAGE_CODE,
+        'hide_untranslated': False,
+    }
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -130,11 +166,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
